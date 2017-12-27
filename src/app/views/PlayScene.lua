@@ -1,3 +1,4 @@
+--导入需要的管理类和自定义layer
 local AudioManager = import (".NNManager.AudioManager")
 local UserHeader = import (".CommonLayers.UserHeader")
 local MyHeader = import (".CommonLayers.MyHeader")
@@ -31,11 +32,9 @@ local posiY_tab = {270,470}
 local MinePosiX_tab = {display.cx-(MinePk_Width+10)*2,display.cx-(MinePk_Width+10),display.cx,display.cx+(MinePk_Width+10),display.cx+(MinePk_Width+10)*2}
 local MinePosiY = 20 + MinePk_Height/2
 
-
 --设置结果 牛X的坐标
 local POSI_niuResultX = {display.cx,280,280,SCREEN_WIDTH-280,SCREEN_WIDTH-280}
 local POSI_niuResultY = {MinePosiY,270,470,470,270}
-
 
 --玩家数量
 local allNumCount = 4
@@ -45,7 +44,6 @@ local layer
 --local gameResult = {}
 -- 五小牛>五花牛>4炸>牛牛>牛9-牛7>牛1-牛6=没牛
 -- 13     12     11   10   7-9       1-6      0 
-
 
 --tempTab 用于随机给牌的tab
 local imgFrameTab
@@ -63,27 +61,14 @@ function PlayScene:onCreate()
     display.loadSpriteFrames("puke_textTure.plist","puke_textTure.pvr.ccz")
     display.loadSpriteFrames("niuResult_textTure.plist","niuResult_textTure.pvr.ccz")
     
-    layer = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
-    layer:setPosition(cc.p(display.cx,display.cy))
-    layer:setIgnoreAnchorPointForPosition(false)--设置锚点默认为（0.5，0.5）
-    layer:setContentSize(cc.size(cc.Director:getInstance():getWinSize().width,cc.Director:getInstance():getWinSize().height))
-    self:addChild(layer)
-
-    -- 背景图
-    local bg = cc.Sprite:create("play_bg.png")
-    bg:setContentSize(cc.Director:getInstance():getWinSize())
-    bg:setAnchorPoint(cc.p(0,0))
-    layer:addChild(bg)
-
-    Allow_HandOut = 0 --不允许点击发牌
-
+    --添加背景layer
+    self:createPlayLayer()
     self:setBackButton()
- 
-    self:setMineView()
-    self:setOtherView()
-
+    self:setMineView()--我的头像
+    self:setOtherView()--其他头像
     self:addPrepareButton()
 
+    Allow_HandOut = 0 --不允许点击发牌
     --初始化牌的图片表
     imgFrameTab = PlayMode:initPkSpriteFrameTab()
     
@@ -95,7 +80,6 @@ function PlayScene:onCreate()
     -- play2Array = PlayMode:getRandom5ImgArray(disruptTab,3)
     -- play3Array = PlayMode:getRandom5ImgArray(disruptTab,4)
     -- play4Array = PlayMode:getRandom5ImgArray(disruptTab,5)
-
 
      --设置发牌动画
      --self:createNewPkAnimation()
@@ -116,6 +100,20 @@ function PlayScene:onEnter()
     AudioManager:getInstance():playRoomMusic()
 end
 
+function PlayScene:createPlayLayer()
+   
+    layer = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
+    layer:setPosition(cc.p(display.cx,display.cy))
+    layer:setIgnoreAnchorPointForPosition(false)--设置锚点默认为（0.5，0.5）
+    layer:setContentSize(cc.size(cc.Director:getInstance():getWinSize().width,cc.Director:getInstance():getWinSize().height))
+    self:addChild(layer)
+
+    -- 背景图
+    local bg = cc.Sprite:create("play_bg.png")
+    bg:setContentSize(cc.Director:getInstance():getWinSize())
+    bg:setAnchorPoint(cc.p(0,0))
+    layer:addChild(bg)
+end
 
 -- 创建牌及发牌动画
 function PlayScene:createNewPkAnimation()

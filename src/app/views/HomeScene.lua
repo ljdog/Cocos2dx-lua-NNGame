@@ -24,8 +24,6 @@ end
 function HomeScene:onEnter()
     --播放背景音乐文件
     AudioManager:getInstance():playBackgroundMusic()
-
-    --HomeMode.log()
 end
 
 
@@ -281,19 +279,28 @@ function HomeScene:setViews()
         end
     end)
 
+    self:addBottomLayer()
 
-    --底部layer
-    local bottomLayer = cc.LayerColor:create(cc.c4b(110,110,110,0))
-    bottomLayer:setPosition(cc.p(0,0))
-    bottomLayer:setContentSize(cc.size(SCREEN_WIDTH,100))
-    self:addChild(bottomLayer)
+end
 
-    -- 背景图
-    local bottombg = cc.Sprite:createWithSpriteFrame(display.newSpriteFrame("xixia001.png") )
-    bottombg:setContentSize(cc.size(SCREEN_WIDTH,90))
-    bottombg:setAnchorPoint(cc.p(0,0))
-    bottomLayer:addChild(bottombg)
+function HomeScene:addTopLayer()
+end
 
+function HomeScene:addMidLayer()
+end
+
+function HomeScene:addBottomLayer()
+     --底部layer
+     local bottomLayer = cc.LayerColor:create(cc.c4b(110,110,110,0))
+     bottomLayer:setPosition(cc.p(0,0))
+     bottomLayer:setContentSize(cc.size(SCREEN_WIDTH,100))
+     self:addChild(bottomLayer)
+ 
+     -- 背景图
+     local bottombg = cc.Sprite:createWithSpriteFrame(display.newSpriteFrame("xixia001.png") )
+     bottombg:setContentSize(cc.size(SCREEN_WIDTH,90))
+     bottombg:setAnchorPoint(cc.p(0,0))
+     bottomLayer:addChild(bottombg)
 end
 
 function HomeScene:registSetMusicVolume()

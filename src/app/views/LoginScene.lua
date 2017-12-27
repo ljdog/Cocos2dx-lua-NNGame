@@ -1,4 +1,3 @@
-
 local AudioManager = import (".NNManager.AudioManager")
 
 local LoginScene = class("LoginScene",cc.load("mvc").ViewBase)
@@ -19,7 +18,6 @@ function LoginScene:onCreate()
     --AudioManager:getInstance()
     -- audioManager:playBackgroundMusic()
 
-
     local layer = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
     layer:setPosition(cc.p(display.cx,display.cy))
     layer:setIgnoreAnchorPointForPosition(false)--设置锚点默认为（0.5，0.5）
@@ -27,14 +25,11 @@ function LoginScene:onCreate()
     self:addChild(layer)
 
 
-   
-
     -- 背景图
     local bg = cc.Sprite:create("bg_login@2x.png")
     bg:setContentSize(LoginScene.SCREEN_SIZE)
     bg:setAnchorPoint(cc.p(0,0))
     self:addChild(bg)
-
 
     -- local titleLab = cc.Label:createWithSystemFont("欢乐牛牛","Arial","70")
     -- titleLab:setColor(cc.c3b(250,250,210))
@@ -123,22 +118,6 @@ function LoginScene:onCreate()
             bgLayer:setContentSize(LoginScene.SCREEN_SIZE)
             bgLayer:setIgnoreAnchorPointForPosition(false)--设置锚点默认为（0.5，0.5）
             self:addChild(bgLayer)
-
-            -- local eventDispatcher = self:getEventDispatcher()
-            --     local function onTouchBegan(touch, event)
-            --         bgLayer:removeFromParent()
-            --     return false   
-            -- end
-
-            -- local listener = cc.EventListenerTouchOneByOne:create()
-            -- listener:setSwallowTouches(true)
-            -- eventDispatcher:addEventListenerWithSceneGraphPriority(listener, bgLayer)
-        
-
-            -- local alertSp = cc.Sprite:create("alert.png")
-            -- alertSp:setPosition(cc.p(display.cx,display.cy))
-            -- alertSp:setContentSize(cc.size(800,497))
-            -- bgLayer:addChild(alertSp)
 
             local okBtn = ccui.Button:create()
             okBtn:setTouchEnabled(true)
